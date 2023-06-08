@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    stages {
+        stage('Deploy to Dev') {
+            when {
+                expression { return params.Environment == 'Dev' }
+            }
+            steps {
+                    sh """
+                    echo "Successfully deployed to Dev"
+                    """
+                }
+            }
+        stage('Deploy to Test') {
+            when {
+                expression { return params.Environment == 'Test' }
+            }
+            steps {
+                    sh """
+                    echo "Successfully deployed to Test"
+                    """
+                }
+            }
+   }
+
+}
