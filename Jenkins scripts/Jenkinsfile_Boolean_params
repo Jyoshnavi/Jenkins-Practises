@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    parameters {
+        booleanParam(name: 'DeployToDev', defaultValue: false, description: 'Deploy to Dev environment')
+        booleanParam(name: 'DeployToTest', defaultValue: false, description: 'Deploy to Test environment')
+    }
+
+    stages {
+        stage('Deploy') {
+            when {
+                expression { params.DeployToDev || params.DeployToTest }
+            }
+            steps {
+                script {
+                    if (params.DeployToDev) {
+                        echo 'Deploying to Dev environment'
+                        // Add deployment steps for Dev
+                    }
+                    
+                    if (params.DeployToTest) {
+                        echo 'Deploying to Test environment'
+                        // Add deployment steps for Test
+                    }
+                }
+            }
+        }
+    }
+}
